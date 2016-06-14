@@ -5,7 +5,6 @@
 Once you've decided how many nodes you want to have then first create your services for each of your nodes to join the cluster like so.
 
 ```yaml
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -24,14 +23,13 @@ spec:
       targetPort: 6001
   selector:
     name: neo4j-<cluster-number>
-    ```
+```
 
 This will mean that each pod will have their own static ip.
 
 Then from there you can spin up your pods. 
 
 ```yaml
----
 apiVersion: v1
 kind: ReplicationController
 metadata:
