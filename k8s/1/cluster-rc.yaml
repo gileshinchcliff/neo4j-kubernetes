@@ -49,10 +49,22 @@ spec:
           - name: "NEO4J_ha_serverId"
             value: "1"
           - name: "NEO4J_ha_initialHosts"
-            value: "neo4j-1:5001,neo4j-2:5001,neo4j-3:5001"
+            value: "neo4j-1:5001,neo4j-2:5001,neo4j-3:5001,neo4j-4:5001,neo4j-5:5001,neo4j-6:5001"
           volumeMounts: 
           - name: data
             mountPath: /var/lib/neo4j/data
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7474
+            initialDelaySeconds: 30
+            timeoutSeconds: 2 
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7474
+            initialDelaySeconds: 30
+            timeoutSeconds: 2 
       restartPolicy: Always
       volumes:
       - name: data

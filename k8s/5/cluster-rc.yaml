@@ -3,27 +3,27 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: neo4j-2
-  name: neo4j-2
+    app: neo4j-6
+  name: neo4j-6
 spec:
 #  strategy: RollingUpdate
   replicas: 1
   selector:
     matchLabels:
-      name: neo4j-2
+      name: neo4j-6
   template:
     metadata:
       labels:
-        name: neo4j-2
+        name: neo4j-6
         app: neo4j
     spec:
       nodeSelector:
-       failure-domain.beta.kubernetes.io/zone: eu-west-1b
+       failure-domain.beta.kubernetes.io/zone: eu-west-1a
       containers:
         -
           imagePullPolicy: Always
           image: neo4j:3.0.2-enterprise
-          name: neo4j-2
+          name: neo4j-6
           resources:
             limits:
               memory: "2G"
@@ -47,16 +47,28 @@ spec:
           - name: "NEO4J_HA_ADDRESS"
             value: "0.0.0.0"
           - name: "NEO4J_ha_serverId"
-            value: "2"
+            value: "1"
           - name: "NEO4J_ha_initialHosts"
-            value: "neo4j-1:5001,neo4j-2:5001,neo4j-3:5001"
+            value: "neo4j-1:5001,neo4j-2:5001,neo4j-3:5001,neo4j-4:5001,neo4j-5:5001,neo4j-6:5001"
           volumeMounts: 
           - name: data
             mountPath: /var/lib/neo4j/data
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7474
+            initialDelaySeconds: 30
+            timeoutSeconds: 2 
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7474
+            initialDelaySeconds: 30
+            timeoutSeconds: 2 
       restartPolicy: Always
       volumes:
       - name: data
         # This AWS EBS volume must already exist.
         awsElasticBlockStore:
-          volumeID: vol-84879076
+          volumeID: vol-b9a71a7c
           fsType: ext4
