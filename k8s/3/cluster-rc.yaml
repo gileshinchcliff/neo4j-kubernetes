@@ -3,27 +3,27 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: neo4j-1
-  name: neo4j-1
+    app: neo4j-3
+  name: neo4j-3
 spec:
 #  strategy: RollingUpdate
   replicas: 1
   selector:
     matchLabels:
-      name: neo4j-1
+      name: neo4j-3
   template:
     metadata:
       labels:
-        name: neo4j-1
+        name: neo4j-3
         app: neo4j
     spec:
       nodeSelector:
-       failure-domain.beta.kubernetes.io/zone: eu-west-1a
+       failure-domain.beta.kubernetes.io/zone: eu-west-1c
       containers:
         -
           imagePullPolicy: Always
-          image: neo4j:3.0.2-enterprise
-          name: neo4j-1
+          image: quay.io/ukhomeofficedigital/neo4j:v0.0.1
+          name: neo4j-3
           resources:
             limits:
               memory: "2G"
@@ -47,7 +47,7 @@ spec:
           - name: "NEO4J_HA_ADDRESS"
             value: "0.0.0.0"
           - name: "NEO4J_ha_serverId"
-            value: "1"
+            value: "3"
           - name: "NEO4J_ha_initialHosts"
             value: "neo4j-1:5001,neo4j-2:5001,neo4j-3:5001"
           volumeMounts: 
@@ -57,18 +57,18 @@ spec:
             exec:
              command:
               - /healthcheck.sh
-            initialDelaySeconds: 100
+            initialDelaySeconds: 20
             timeoutSeconds: 2 
           livenessProbe:
             exec:
              command:
               - /healthcheck.sh
-            initialDelaySeconds: 100
+            initialDelaySeconds: 20
             timeoutSeconds: 2 
       restartPolicy: Always
       volumes:
       - name: data
         # This AWS EBS volume must already exist.
         awsElasticBlockStore:
-          volumeID: vol-b9a71a7c
+          volumeID: vol-2013f991
           fsType: ext4

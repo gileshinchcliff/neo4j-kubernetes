@@ -85,8 +85,3 @@ Note the environment variables:
 * `NEO4J_ha_initialHosts` a comma separated list of your nodes using the service ips, or dns names if you have them.
 * `NEO4J_ha_serverId` id of a server must be unique within a cluster.
 * `NEO4J_ha_host_coordination` same as `NEO4J_HA_ADDRESS` but with the port added.
-
-
-Node:		ip-10-50-2-178.eu-west-1.compute.internal/10.50.2.178
-Node:   ip-10-50-2-178.eu-west-1.compute.internal/10.50.2.178
-Node:   ip-10-50-2-30.eu-west-1.compute.internal/10.50.2.30

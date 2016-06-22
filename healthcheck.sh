@@ -13,14 +13,16 @@ if [ "netstat -plunt | grep 5001" ]; then
        
        exit 0
      fi
-   else
+    else
      if [ -f /first_run ]; then
       echo "connected to port 7474 successfully"
       exit 0 
-    else 
+     else 
       touch /first_run
       echo "connected to port 7474 for the first time"
-   fi
+      exit 0
+     fi
+    fi
   else 
     echo "port 6001 not available exiting"   
     exit 1
