@@ -3,18 +3,18 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: neo4j-1
-  name: neo4j-1
+    app: neo4j-3
+  name: neo4j-3
 spec:
 #  strategy: RollingUpdate
   replicas: 1
   selector:
     matchLabels:
-      name: neo4j-1
+      name: neo4j-3
   template:
     metadata:
       labels:
-        name: neo4j-1
+        name: neo4j-3
         app: neo4j
     spec:
       nodeSelector:
@@ -22,8 +22,8 @@ spec:
       containers:
         -
           imagePullPolicy: Always
-          image: neo4j:3.0.2-enterprise
-          name: neo4j-1
+          image: rebelastronaut/neo4j-kubernetes:v0.0.1
+          name: neo4j-3
           resources:
             limits:
               memory: "2G"
@@ -31,34 +31,34 @@ spec:
           ports:
           - containerPort: 7474
             name: "http"
-          - containerPort: 5001
-            name: "cluster"
-          - containerPort: 6001
-            name: "transaction"
+          - containerPort: 5002
+            name: "cluster-secure"
+          - containerPort: 6002
+            name: "data-secure"
           env:
           - name: "NEO4J_dbms_mode"
             value: "HA"
     #      - name: NEO4J_AUTH
     #        value: "none"
           - name: NEO4J_ha_host_coordination
-            value: 0.0.0.0:5001
+            value: 127.0.0.1:5001
           - name: NEO4J_ha_host_data
-            value: 0.0.0.0:6001
+            value: 127.0.0.1:6001
           - name: "NEO4J_HA_ADDRESS"
             value: "0.0.0.0"
           - name: "NEO4J_ha_serverId"
-            value: "1"
+            value: "3"
           - name: "NEO4J_ha_initialHosts"
-            value: "neo4j-1:5001,neo4j-2:5001,neo4j-3:5001,neo4j-4:5001,neo4j-5:5001,neo4j-6:5001"
-          volumeMounts: 
-          - name: data
-            mountPath: /var/lib/neo4j/data
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 7474
-            initialDelaySeconds: 30
-            timeoutSeconds: 2 
+            value: "https://neo4j-1:5002,https://neo4j-2:5002,https://neo4j-3:5002"
+  #        volumeMounts: 
+  #        - name: data
+  #          mountPath: /var/lib/neo4j/data
+  #        readinessProbe:
+  #          httpGet:
+  #            path: /
+  #            port: 7474
+  #          initialDelaySeconds: 30
+  #          timeoutSeconds: 2 
           livenessProbe:
             httpGet:
               path: /
