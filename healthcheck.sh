@@ -10,11 +10,16 @@ if [ "netstat -plunt | grep 5001" ]; then
        exit 1 
      else
        echo "still creating a cluster exiting successfully"
+       
        exit 0
      fi
    else
-     echo "connected to port 7474 successfully"
-     exit 0 
+     if [ -f /first_run ]; then
+      echo "connected to port 7474 successfully"
+      exit 0 
+    else 
+      touch /first_run
+      echo "connected to port 7474 for the first time"
    fi
   else 
     echo "port 6001 not available exiting"   
