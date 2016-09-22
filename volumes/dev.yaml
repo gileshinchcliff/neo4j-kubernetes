@@ -1,0 +1,204 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: neo4j.1
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j-1a"
+  labels:
+    name: neo4j.1
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    volumeID: vol-5ca346de
+    fsType: ext4
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: neo4j.1
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j.1"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  selector:
+    matchLabels:  
+       name: neo4j.1  
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: neo4j.2
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j-1b"
+  labels:
+    name: neo4j.2
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    volumeID: vol-1c20349b
+    fsType: ext4  
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: neo4j.2
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j.2"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  selector:
+    matchLabels:  
+       name: neo4j.2 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: neo4j.3
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j-1c"
+  labels:
+    name: neo4j.3
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    volumeID: vol-18f6a1a9
+    fsType: ext4
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: neo4j.3
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j.3"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  selector:
+    matchLabels:  
+       name: neo4j.3 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: neo4j.4
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j-1a"    
+  labels:
+    name: neo4j.4
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    volumeID: vol-aaac4928
+    fsType: ext4  
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: neo4j.4
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j.4"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  selector:
+    matchLabels:  
+       name: neo4j.4 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: neo4j.5
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j-1b"
+  labels:
+    name: neo4j.5
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    volumeID: vol-554658d2
+    fsType: ext4
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: neo4j.5
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j.5"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  selector:
+    matchLabels:  
+       name: neo4j.5
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: neo4j.6
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j-1c"
+  labels:
+    name: neo4j.6
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    volumeID: vol-5ae0b0eb
+    fsType: ext4  
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: neo4j.6
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "neo4j.6"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  selector:
+    matchLabels:  
+       name: neo4j.6
+    

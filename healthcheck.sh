@@ -1,33 +1,12 @@
 #!/bin/bash
-httptest=$(curl -w %{http_code} -s --output /dev/null localhost:7474)
-if [ "netstat -plunt | grep 5001" ]; then
-  echo "successfully connected to port 5001"
-  if [ "netstat -plunt | grep 6001" ]; then  
-    echo "successfully connected to port 6001"
-    if [[ $httptest -ne 200 ]]; then
-     if [ -f /first_run ]; then 
-       echo "lost connection to port 7474"
-       exit 1 
-     else
-       echo "still creating a cluster exiting successfully"
-       
-       exit 0
-     fi
-    else
-     if [ -f /first_run ]; then
-      echo "connected to port 7474 successfully"
-      exit 0 
-     else 
-      touch /first_run
-      echo "connected to port 7474 for the first time"
-      exit 0
-     fi
-    fi
-  else 
-    echo "port 6001 not available exiting"   
+#!/bin/bash
+
+STATUSCODE=$(curl -k -L --silent --output /dev/null --write-out "%{http_code}" https://127.0.0.1:7473/)
+
+if test $STATUSCODE -ne 200; then
+    echo "FAILURE"
     exit 1
-  fi
-else 
-  echo "port 5001 not available exiting"
-  exit 1
+else
+    echo "SUCCESS"
+    exit 0
 fi
