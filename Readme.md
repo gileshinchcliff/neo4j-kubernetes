@@ -85,3 +85,6 @@ Note the environment variables:
 * `NEO4J_ha_initialHosts` a comma separated list of your nodes using the service ips, or dns names if you have them.
 * `NEO4J_ha_serverId` id of a server must be unique within a cluster.
 * `NEO4J_ha_host_coordination` same as `NEO4J_HA_ADDRESS` but with the port added.
+* `S3_PATH` Designed for preprod and dev environments if you want to be able to restore to s specific dataset stored in an s3 bucket.
+* `AWS_ACCESS_KEY_ID` Access key to copy from s3 bucket.
+* `AWS_SECRET_ACCESS_KEY` Secret access key for s3 bucket.

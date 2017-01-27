@@ -15,6 +15,9 @@ setting() {
         sed --in-place "s|.*${setting}=.*|${setting}=${value}|" conf/"${file}"
     fi
 }
+if { -z $S3_PATH } then
+  aws s3 --region=eu-west-1 cp s3://$S3_PATH /data/databases/graph.db --recursive
+fi
 
 if [ "$1" == "neo4j" ]; then
     setting "dbms.tx_log.rotation.retention_policy" "${NEO4J_dbms_txLog_rotation_retentionPolicy:-100M size}"
